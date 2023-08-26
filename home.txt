@@ -1,0 +1,154 @@
+// import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
+// import React, { useEffect, useState } from "react";
+// import ScreenWrapper from "../components/screenWrapper";
+// import tw from "twrnc";
+// import randomImage from "../assets/randomImage";
+// import EmptyList from "../components/emptyList";
+// import { useIsFocused, useNavigation } from "@react-navigation/native";
+// import { signOut } from "firebase/auth";
+// import { auth, tripsRef } from "../config/firebase";
+// import { useSelector } from "react-redux";
+// import { getDoc, getDocs, query, where } from "firebase/firestore";
+// var items = [
+//   {
+//     id: 1,
+//     place: "JODHPUR",
+//     country: "INDIA",
+//   },
+//   {
+//     id: 2,
+//     place: "UDAIPUR",
+//     country: "INDIA",
+//   },
+
+//   {
+//     id: 3,
+//     place: "DELHI",
+//     country: "INDIA",
+//   },
+//   {
+//     id: 4,
+//     place: "DAMMAM",
+//     country: "UAE",
+//   },
+//   {
+//     id: 9,
+//     place: "USA",
+//     country: "HMM",
+//   },
+//   {
+//     id: 10,
+//     place: "USA",
+//     country: "HMM",
+//   },
+//   {
+//     id: 11,
+//     place: "USA",
+//     country: "HMM",
+//   },
+//   {
+//     id: 12,
+//     place: "USA",
+//     country: "HMM",
+//   },
+//   {
+//     id: 2222,
+//     place: "USA",
+//     country: "HMM",
+//   },
+//   {
+//     id: 4444,
+//     place: "USA",
+//     country: "HMM",
+//   },
+//   {
+//     id: 1111,
+//     place: "USA",
+//     country: "HMM",
+//   },
+// ];
+// export default function HomeScreen() {
+//   const navigation = useNavigation();
+
+//   const { user } = useSelector((state) => state.user);
+//   const [trips, setTrips] = useState([]);
+
+//   const isFocused = useIsFocused();
+
+//   const fetchTrips = async () => {
+//     const q = query(tripsRef, where("userId", "==", user.uid));
+//     const querySnapshot = await getDocs(q);
+//     let data = [];
+//     querySnapshot.forEach((doc) => {
+//       // console.log('documement: ',doc.data());
+//       data.push({ ...doc.data(), id: doc.id });
+//     });
+//     setTrips(data);
+//   };
+
+//   useEffect(() => {
+//     if (isFocused) fetchTrips();
+//   }, [isFocused]);
+
+//   const handleLogout = async () => {
+//     await signOut(auth);
+//   };
+//   return (
+//     <ScreenWrapper style={tw`flex-1`}>
+//       {/* Top Banner Start */}
+//       <View style={tw`flex-row justify-between items-center p-4`}>
+//         <Text style={tw`text-gray-600 font-bold text-2xl shadow-sm`}>
+//           BURHAN
+//         </Text>
+//         <TouchableOpacity
+//           onPress={handleLogout}
+//           style={tw`p-2 px-3 bg-white border border-gray-200 rounded-full`}
+//         >
+//           <Text style={tw`text-gray-600`}>Sign Out</Text>
+//         </TouchableOpacity>
+//       </View>
+//       {/* Top Banner Ended */}
+//       <View
+//         style={tw`flex-row justify-center bg-blue-200 items-center rounded-xl mx-4 mb-4`}
+//       >
+//         <Image source={require("../assets/banner.png")} style={tw`w-80 h-60`} />
+//       </View>
+//       {/* Center 1  Recent Post Start */}
+//       <View style={tw`px-4`}>
+//         <View style={tw`flex-row justify-between items-center`}>
+//           <Text style={tw`text-gray-600 font-bold text-xl`}>Recent Trips</Text>
+//           <TouchableOpacity
+//             onPress={() => navigation.navigate("AddTrip")}
+//             style={tw`p-2 px-3 bg-white border  border-gray-200 rounded-full`}
+//           >
+//             <Text>Add Trip</Text>
+//           </TouchableOpacity>
+//         </View>
+//         <View style={{ height: 430 }}>
+//         <FlatList 
+//                     data={trips}
+//                     numColumns={2}
+//                     ListEmptyComponent={<EmptyList message={"You haven't recorded any trips yet"} />}
+//                     keyExtractor={item=> item.id}
+//                     showsVerticalScrollIndicator={false}
+//                     columnWrapperStyle={{
+//                         justifyContent: 'space-between'
+//                     }}
+//                     className="mx-1"
+//                     renderItem={({item})=>{
+//                         return (
+//                             <TouchableOpacity onPress={()=> navigation.navigate('TripExpenses', {...item})} style={tw `bg-white p-3 rounded-2xl mb-3 shadow-sm`}>
+//                                 <View>
+//                                     <Image source={randomImage()} className="w-36 h-36 mb-2" />
+//                                     <Text>{item.place}</Text>
+//                                     <Text>{item.country}</Text>
+//                                 </View>
+//                             </TouchableOpacity>
+//                         )
+//                     }}
+//                 />
+//         </View>
+//       </View>
+//     </ScreenWrapper>
+//   );
+// }
