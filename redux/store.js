@@ -10,3 +10,6 @@ export const store = configureStore({
       serializableCheck: false,
     }),
 });
+
+
+console.log("This is the storage for checking testing")
